@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MathLab - Formules et Exercices</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="MATH.jpg" alt="MathLab Logo" class="nav-img">
+    Math<span>Lab</span>
+  </div>
+  <button class="nav-btn active" onclick="showPage('formulas',this)">Formules</button>
+  <button class="nav-btn" onclick="showPage('exercices',this)">Exercices</button>
+</nav>
+
+<!-- PAGE FORMULES -->
+<div id="page-formulas" class="page active">
+  <div class="hero">
+    <div class="hero-label">Mathematiques Interactives</div>
+    <h1>Explore les <em>formules</em><br>et resous tes equations</h1>
+    <p>Pythagore, Thales, equations et plus - tout en un seul endroit.</p>
+  </div>
+  <div class="container">
+
+    <div class="solver">
+      <h2>Solveur d'Equations</h2>
+      <p>Entre une expression et appuie sur Entree - resultat instantane.</p>
+      <div class="srow">
+        <input type="text" id="eq-input" placeholder="ex: 2x + 5 = 13  ou  3^2 + 4^2" onkeydown="if(event.key==='Enter')solveEq()">
+        <button class="btn" onclick="solveEq()">Resoudre</button>
+      </div>
+      <div class="chips">
+        <span class="chip" onclick="setEq('2x + 5 = 13')">2x + 5 = 13</span>
+        <span class="chip" onclick="setEq('3x - 7 = 2x + 4')">3x - 7 = 2x + 4</span>
+        <span class="chip" onclick="setEq('x^2 = 25')">x^2 = 25</span>
+        <span class="chip" onclick="setEq('sqrt(144)')">sqrt(144)</span>
+        <span class="chip" onclick="setEq('2*(3+5)-4')">2*(3+5)-4</span>
+      </div>
+      <div id="eq-res" class="res"></div>
+    </div>
+
+    <div class="div"></div>
+    <div class="sec"><span>//</span> Theoreme de Pythagore</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-tag">Pythagore - Hypotenuse</div>
+        <h3>Trouver l'hypotenuse</h3>
+        <p>Calcule c a partir des deux cotes de l'angle droit.</p>
+        <div class="fbox">c = sqrt(a^2 + b^2)</div>
+        <div class="row">
+          <div class="ig"><label class="lbl">cote a</label><input type="number" id="pa" placeholder="3"></div>
+          <div class="ig"><label class="lbl">cote b</label><input type="number" id="pb" placeholder="4"></div>
+        </div>
+        <button class="btn" onclick="calcHyp()">Calculer c</button>
+        <div id="pr1" class="res"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Pythagore - Verification</div>
+        <h3>Triangle rectangle ?</h3>
+        <p>Saisis les 3 cotes et verifie si le triangle est rectangle.</p>
+        <div class="fbox">c^2 = a^2 + b^2 ?</div>
+        <div class="row">
+          <div class="ig"><label class="lbl">a</label><input type="number" id="pva" placeholder="3"></div>
+          <div class="ig"><label class="lbl">b</label><input type="number" id="pvb" placeholder="4"></div>
+          <div class="ig"><label class="lbl">c</label><input type="number" id="pvc" placeholder="5"></div>
+        </div>
+        <button class="btn" onclick="verifyRight()">Verifier</button>
+        <div id="pr2" class="res"></div>
+      </div>
+
+    </div>
+
+    <div class="div"></div>
+    <div class="sec"><span>//</span> Theoreme de Thales</div>
+    <div class="grid">
+
+      <div class="card wide">
+        <div class="card-tag">Thales - Longueur inconnue</div>
+        <h3>Trouver une longueur via les rapports</h3>
+        <p>Saisis AB, A'B' et AC pour trouver A'C', ou remplis les 4 champs pour verifier les rapports.</p>
+        <div class="fbox">AB / A'B' = AC / A'C'</div>
+        <div class="row">
+          <div class="ig"><label class="lbl">AB</label><input type="number" id="tab" placeholder="6"></div>
+          <div class="ig"><label class="lbl">A'B'</label><input type="number" id="tab2" placeholder="9"></div>
+          <div class="ig"><label class="lbl">AC</label><input type="number" id="tac" placeholder="4"></div>
+          <div class="ig"><label class="lbl">A'C' (inconnu)</label><input type="number" id="tac2" placeholder="?"></div>
+        </div>
+        <div style="display:flex;gap:.7rem;flex-wrap:wrap">
+          <button class="btn" onclick="calcThales()">Calculer A'C'</button>
+          <button class="btn sec" onclick="calcThalesRatio()">Verifier les rapports</button>
+        </div>
+        <div id="tr" class="res"></div>
+      </div>
+
+    </div>
+
+    <div class="div"></div>
+    <div class="sec"><span>//</span> Autres Formules</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-tag">Geometrie - Cercle</div>
+        <h3>Perimetre et Aire du cercle</h3>
+        <div class="fbox">P = 2 x pi x r  |  A = pi x r^2</div>
+        <div class="ig" style="margin-bottom:.7rem"><label class="lbl">rayon r</label><input type="number" id="cr" placeholder="5"></div>
+        <button class="btn" onclick="calcCircle()">Calculer</button>
+        <div id="cres" class="res"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Geometrie - Aire</div>
+        <h3>Aire du triangle et rectangle</h3>
+        <div class="fbox">Triangle: (b x h)/2  |  Rect: l x L</div>
+        <div class="row">
+          <div class="ig"><label class="lbl">base b</label><input type="number" id="ab2" placeholder="6"></div>
+          <div class="ig"><label class="lbl">hauteur h</label><input type="number" id="ah" placeholder="4"></div>
+        </div>
+        <button class="btn" onclick="calcAreas()">Calculer</button>
+        <div id="ares" class="res"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Algebre - Identites</div>
+        <h3>Identites remarquables</h3>
+        <div class="fbox">(a+b)^2  |  (a-b)^2  |  (a+b)(a-b)</div>
+        <div class="row">
+          <div class="ig"><label class="lbl">a</label><input type="number" id="ida" placeholder="3"></div>
+          <div class="ig"><label class="lbl">b</label><input type="number" id="idb" placeholder="2"></div>
+        </div>
+        <button class="btn" onclick="calcId()">Developper</button>
+        <div id="idres" class="res"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAGE EXERCICES -->
+<div id="page-exercices" class="page">
+  <div class="ex-hero">
+    <h1>Exercices <em>Pratiques</em></h1>
+    <p>5 exercices progressifs - JavaScript en action</p>
+  </div>
+  <div class="ex-grid">
+
+    <div class="ex-card">
+      <div class="ex-num">// Exercice 01</div>
+      <h3>Triangle rectangle ?</h3>
+      <p class="desc">Saisis AB, AC et BC. Le programme detecte si le triangle est rectangle et en quel sommet.</p>
+      <div class="row">
+        <div class="ig"><label class="lbl">AB</label><input type="number" id="e1ab" placeholder="3"></div>
+        <div class="ig"><label class="lbl">AC</label><input type="number" id="e1ac" placeholder="5"></div>
+        <div class="ig"><label class="lbl">BC</label><input type="number" id="e1bc" placeholder="4"></div>
+      </div>
+      <button class="btn" onclick="ex1()">Verifier</button>
+      <div id="r1" class="res"></div>
+    </div>
+
+    <div class="ex-card">
+      <div class="ex-num">// Exercice 02</div>
+      <h3>Calculer l'hypotenuse</h3>
+      <p class="desc">Saisis deux cotes de l'angle droit pour obtenir la longueur de l'hypotenuse.</p>
+      <div class="row">
+        <div class="ig"><label class="lbl">cote a</label><input type="number" id="e2a" placeholder="3"></div>
+        <div class="ig"><label class="lbl">cote b</label><input type="number" id="e2b" placeholder="4"></div>
+      </div>
+      <button class="btn" onclick="ex2()">Calculer</button>
+      <div id="r2" class="res"></div>
+    </div>
+
+    <div class="ex-card">
+      <div class="ex-num">// Exercice 03</div>
+      <h3>Compter les "e"</h3>
+      <p class="desc">Saisis un mot ou une phrase. Le programme compte combien de fois la lettre <strong>e</strong> apparait.</p>
+      <div class="row"><input type="text" id="e3w" placeholder="exemple : mathematiques"></div>
+      <button class="btn" onclick="ex3()">Compter les e</button>
+      <div id="r3" class="res"></div>
+    </div>
+
+    <div class="ex-card">
+      <div class="ex-num">// Exercice 04</div>
+      <h3>Jeu du Plus ou Moins</h3>
+      <p class="desc">Trouve le nombre secret entre 1 et 100. Le jeu t'indique si c'est plus grand ou plus petit.</p>
+      <div class="gdisp" id="gdisp">?</div>
+      <div class="row" style="justify-content:center">
+        <input type="number" id="ginput" placeholder="Ta proposition" min="1" max="100" onkeydown="if(event.key==='Enter')gameGuess()" style="max-width:200px">
+      </div>
+      <div class="gbtns">
+        <button class="btn" onclick="gameGuess()">Proposer</button>
+        <button class="btn sec" onclick="gameReset()">Nouvelle partie</button>
+      </div>
+      <div class="ghist" id="ghist"></div>
+      <div class="gatt" id="gatt"></div>
+      <div id="r4" class="res"></div>
+    </div>
+
+    <div class="ex-card">
+      <div class="ex-num">// Exercice 05</div>
+      <h3>QCM - Mathematiques</h3>
+      <p class="desc">3 questions sur les maths. Reponds a chacune puis clique sur <strong>Valider</strong> pour voir ton score.</p>
+      <div class="qq">
+        <h4>Q1 - Quelle formule donne l'aire d'un cercle de rayon r ?</h4>
+        <select id="q1">
+          <option value="">-- Choisir --</option>
+          <option value="a">A = pi x r</option>
+          <option value="b">A = 2 x pi x r</option>
+          <option value="c">A = pi x r^2</option>
+          <option value="d">A = r^2</option>
+        </select>
+      </div>
+      <div class="qq">
+        <h4>Q2 - Les deux cotes de l'angle droit mesurent 3 et 4. Quelle est l'hypotenuse ?</h4>
+        <input type="number" id="q2" placeholder="Ta reponse">
+      </div>
+      <div class="qq">
+        <h4>Q3 - Le theoreme de Thales s'applique uniquement aux triangles rectangles.</h4>
+        <div class="tf">
+          <button class="btn sec" id="qtrue" onclick="setTF('true')">Vrai</button>
+          <button class="btn sec" id="qfalse" onclick="setTF('false')">Faux</button>
+        </div>
+      </div>
+      <button class="btn" onclick="validateQCM()">Valider le QCM</button>
+      <div id="qres" class="qres"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
